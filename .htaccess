@@ -1,0 +1,24 @@
+php_value short_open_tag On
+
+Options -Indexes
+
+<FilesMatch "\.(php)$">
+Deny from all
+</FilesMatch>
+
+<FilesMatch "^index.(php)$">
+Allow from all
+</FilesMatch>
+
+RewriteEngine On
+
+#Rewrite all other URLs to index.php? [URL]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_URI} !^\/resources/styles/(.*).css
+RewriteCond %{REQUEST_URI} !^\/resources/images/(.*).png
+RewriteCond %{REQUEST_URI} !^\/resources/images/(.*).jpg
+RewriteCond %{REQUEST_URI} !^\/resources/lib/jquery/(.*).js
+RewriteRule .* index.php?someShopUrl=$0 [QSA]
+
+
+
